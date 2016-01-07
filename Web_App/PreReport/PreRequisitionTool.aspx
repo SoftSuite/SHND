@@ -1,0 +1,125 @@
+<%@ Page Language="C#" MasterPageFile="~/Templates/Page1.master" AutoEventWireup="true" CodeFile="PreRequisitionTool.aspx.cs" Inherits="PreReport_PreRequisitionTool" Title="SHND : Report - Requisition Tool" %>
+<%@ Register Src="../Templates/CalendarControl.ascx" TagName="CalendarControl" TagPrefix="uc2" %>
+<%@ Register Src="../Templates/ToolBarItemCtl.ascx" TagName="ToolBarItemCtl" TagPrefix="uc1" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" Runat="Server">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+            <td class="headtext">รายงานสรุปจำนวนยอดวัสดุอุปกรณ์ที่หน่วยงานเบิก
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <uc1:ToolBarItemCtl ID="tbPrint" runat="server" ToobarTitle="พิมพ์รายงาน" ToolbarImage="../Images/icn_print.png"  OnClick="tbPrintClick"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                            <asp:TextBox ID="txtDivision" runat="server" Visible="false"></asp:TextBox>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table border="0" cellpadding="0" cellspacing="0" width="600" style="border-right: thin solid; border-top: thin solid; border-left: thin solid; border-bottom: thin solid">
+                    <tr>
+                    <td colspan="5" class="t_headtext">
+                        &nbsp;กำหนดเงื่อนไข
+                    </td>
+                </tr>
+                 <tr style="height:10px"></tr>
+                    <tr style="height:24px">
+                        <td style="width:130px; padding-right:10px" align="right">
+                            หน่วยงาน :</td>
+                        <td><asp:DropDownList ID="cmbDivision" runat="server" CssClass="zComboBox" Width="200px">
+                            </asp:DropDownList>
+                            </td>
+                    </tr>  
+                    <tr style="height:24px">
+                        <td style="width:130px; padding-right:10px" align="right">
+                            ประเภทวัสดุ :</td>
+                        <td><asp:DropDownList ID="cmbClass" runat="server" CssClass="zComboBox" Width="200px"  OnSelectedIndexChanged="cmbClass_SelectedIndexChanged" AutoPostBack="True">
+                            </asp:DropDownList>
+                            </td>
+                    </tr> 
+                    <tr style="height:24px">
+                        <td style="width:130px; padding-right:10px" align="right">
+                            วัสดุอุปกรณ์ :</td>
+                        <td>
+                            <asp:DropDownList ID="cmbMaterial" runat="server" CssClass="zComboBox" Width="200px" OnSelectedIndexChanged="cmbMaterial_SelectedIndexChanged" AutoPostBack="True">
+                            </asp:DropDownList>&nbsp; หน่วย &nbsp;<asp:DropDownList ID="cmbUnit" runat="server" CssClass="zComboBox" Width="70px" Enabled="False">
+                            </asp:DropDownList></td>
+                    </tr> 
+                    <tr style="height:24px">
+                        <td style="width:130px; padding-right:10px" align="right">
+                            ข้อมูลสรุป :</td>
+                        <td>
+                            <asp:RadioButtonList ID="rbtType" runat="server" RepeatDirection="Horizontal" AutoPostBack="True" OnSelectedIndexChanged="rbtType_SelectedIndexChanged">
+                                <asp:ListItem Selected="true" Value="dd">รายวัน</asp:ListItem>
+                                <asp:ListItem Value="mm">รายเดือน</asp:ListItem>
+                                <asp:ListItem Value="yy">รายปี</asp:ListItem>
+                            </asp:RadioButtonList>
+                            </td>
+                    </tr>
+                                        <tr id="pnlDate"  runat="server" style="height:24px">
+                        <td style="width:130px; padding-right:10px" align="right">
+                            ระหว่างวันที่ :</td>
+                        <td>
+                            <uc2:CalendarControl ID="ctlDateFrom" runat="server" />
+                            &nbsp;ถึง
+                            <uc2:CalendarControl ID="ctlDateTo" runat="server" />
+                        </td>
+                    </tr> 
+                   
+                    <tr id="pnlMonth"  runat="server"  style="height:24px" visible="false">
+                        <td style="width:130px; padding-right:10px" align="right">
+                            ระหว่างเดือน :</td>
+                        <td>
+                            <asp:DropDownList ID="cmbMonthFrom" runat="server" Width="106px">
+                                <asp:ListItem Value="0">เลือก</asp:ListItem>
+                                <asp:ListItem Value="1">มกราคม</asp:ListItem>
+                                <asp:ListItem Value="2">กุมภาพันธ์</asp:ListItem>
+                                <asp:ListItem Value="3">มีนาคม</asp:ListItem>
+                                <asp:ListItem Value="4">เมษายน</asp:ListItem>
+                                <asp:ListItem Value="5">พฤษภาคม</asp:ListItem>
+                                <asp:ListItem Value="6">มิถุนายน</asp:ListItem>
+                                <asp:ListItem Value="7">กรกฎาคม</asp:ListItem>
+                                <asp:ListItem Value="8">สิงหาคม</asp:ListItem>
+                                <asp:ListItem Value="9">กันยายน</asp:ListItem>
+                                <asp:ListItem Value="10">ตุลาคม</asp:ListItem>
+                                <asp:ListItem Value="11">พฤศจิกายน</asp:ListItem>
+                                <asp:ListItem Value="12">ธันวาคม</asp:ListItem>
+                            </asp:DropDownList> ปี 
+                            <asp:TextBox ID="txtMYearFrom" CssClass="zTextBox" runat="server" Width="45px" MaxLength="4"></asp:TextBox>
+                            &nbsp;ถึงเดือน <asp:DropDownList ID="cmbMonthTo" runat="server" Width="106px">
+                             <asp:ListItem Value="0">เลือก</asp:ListItem>
+                                <asp:ListItem Value="1">มกราคม</asp:ListItem>
+                                <asp:ListItem Value="2">กุมภาพันธ์</asp:ListItem>
+                                <asp:ListItem Value="3">มีนาคม</asp:ListItem>
+                                <asp:ListItem Value="4">เมษายน</asp:ListItem>
+                                <asp:ListItem Value="5">พฤษภาคม</asp:ListItem>
+                                <asp:ListItem Value="6">มิถุนายน</asp:ListItem>
+                                <asp:ListItem Value="7">กรกฎาคม</asp:ListItem>
+                                <asp:ListItem Value="8">สิงหาคม</asp:ListItem>
+                                <asp:ListItem Value="9">กันยายน</asp:ListItem>
+                                <asp:ListItem Value="10">ตุลาคม</asp:ListItem>
+                                <asp:ListItem Value="11">พฤศจิกายน</asp:ListItem>
+                                <asp:ListItem Value="12">ธันวาคม</asp:ListItem>
+                            </asp:DropDownList> ปี 
+                            <asp:TextBox ID="txtMYearTo" CssClass="zTextBox" runat="server" Width="45px" MaxLength="4"></asp:TextBox>              
+                        </td>
+                    </tr>                    
+                    <tr id="PnlYear"  runat="server"  style="height:24px" visible="false">
+                        <td style="width:130px; padding-right:10px" align="right">
+                            ระหว่างปี :</td>
+                        <td>
+                            <asp:TextBox ID="txtYearFrom" CssClass="zTextBox" runat="server" Width="45px" MaxLength="4"></asp:TextBox>
+                            &nbsp;ถึง
+                            <asp:TextBox ID="txtYearTo" CssClass="zTextBox" runat="server" Width="45px" MaxLength="4"></asp:TextBox>
+                        </td>
+                    </tr> 
+                    </table> 
+
+            </td>
+        </tr>
+    </table>
+</asp:Content>
+

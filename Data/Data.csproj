@@ -1,0 +1,275 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{35E6306D-3445-4FA3-BAC5-268DE4AE995E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SHND.Data</RootNamespace>
+    <AssemblyName>Data</AssemblyName>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Admin\CutOffTimeData.cs" />
+    <Compile Include="Admin\ZMenuData.cs" />
+    <Compile Include="Common\MenuData.cs" />
+    <Compile Include="Common\UserData.cs" />
+    <Compile Include="Common\Utilities\Constant.cs" />
+    <Compile Include="Common\Utilities\DataResources.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Common\Utilities\GenerateConstant.cs" />
+    <Compile Include="Common\Utilities\GenerateData.cs" />
+    <Compile Include="Common\Utilities\LoggedOnUserData.cs" />
+    <Compile Include="Formula\FoodTypeData.cs" />
+    <Compile Include="Formula\FormulaSetDetailData.cs" />
+    <Compile Include="Formula\FormulaSetSearchData.cs" />
+    <Compile Include="Formula\MenuChangeData.cs" />
+    <Compile Include="Inventory\RepairItemData.cs" />
+    <Compile Include="Inventory\RepairRequestData.cs" />
+    <Compile Include="Inventory\StockOutDetailData.cs" />
+    <Compile Include="Inventory\StockOutRequestData.cs" />
+    <Compile Include="Inventory\VMenuStockOutData.cs" />
+    <Compile Include="Order\OrderMedicalFeedData.cs" />
+    <Compile Include="Order\OrderMilkData.cs" />
+    <Compile Include="Order\OrderNonMedicalData.cs" />
+    <Compile Include="Order\VOrderPatientData.cs" />
+    <Compile Include="Plan\PlanFoodDivisionDetailData.cs" />
+    <Compile Include="Plan\PlanToolsDetailData.cs" />
+    <Compile Include="Plan\PlanToolsDivisionDetailData.cs" />
+    <Compile Include="Purchase\POSearchData.cs" />
+    <Compile Include="Purchase\ReceiveSearchData.cs" />
+    <Compile Include="Purchase\PrePOSearchData.cs" />
+    <Compile Include="Tables\AdmitPateintData.cs" />
+    <Compile Include="Tables\CutOffTimeData.cs" />
+    <Compile Include="Tables\DoctypeData.cs" />
+    <Compile Include="Tables\MedFeedChargeData.cs" />
+    <Compile Include="Tables\MedFeedChargeItemData.cs" />
+    <Compile Include="Tables\MenuItemChangeData.cs" />
+    <Compile Include="Tables\MenuStandardData.cs" />
+    <Compile Include="Tables\NutrientData.cs" />
+    <Compile Include="Formula\StdMenuDetailData.cs" />
+    <Compile Include="Formula\StdMenuItemControlData.cs" />
+    <Compile Include="Order\VOrderWelfareData.cs" />
+    <Compile Include="Plan\PlanFoodDetailData.cs" />
+    <Compile Include="Tables\DivisionData.cs" />
+    <Compile Include="Tables\FormulaMilkItemData.cs" />
+    <Compile Include="Tables\HolidayData.cs" />
+    <Compile Include="Tables\MaterialClassData.cs" />
+    <Compile Include="Tables\MaterialGroupData.cs" />
+    <Compile Include="Tables\MenuDiseaseData.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Search\MaterialMasterPopupData.cs" />
+    <Compile Include="Tables\DiseaseCategoryData.cs" />
+    <Compile Include="Tables\FoodCategoryData.cs" />
+    <Compile Include="Tables\FormulaDiseaseData.cs" />
+    <Compile Include="Tables\FormulaFeedData.cs" />
+    <Compile Include="Tables\FormulaMilkData.cs" />
+    <Compile Include="Tables\FormularFeedItemData.cs" />
+    <Compile Include="Tables\FormulaServeData.cs" />
+    <Compile Include="Tables\FormulaSetItemData.cs" />
+    <Compile Include="Tables\MaterialMasterData.cs" />
+    <Compile Include="Tables\MaterialNutrientData.cs" />
+    <Compile Include="Tables\MaterialSeasonData.cs" />
+    <Compile Include="Tables\MenuDetailData.cs" />
+    <Compile Include="Tables\MilkCategoryData.cs" />
+    <Compile Include="Tables\MilkCodeData.cs" />
+    <Compile Include="Tables\OderWelfareDetailData.cs" />
+    <Compile Include="Order\OrderMedicalSetData.cs" />
+    <Compile Include="Tables\OrderPartyData.cs" />
+    <Compile Include="Tables\OrderPartyItemData.cs" />
+    <Compile Include="Tables\OrderWelfareData.cs" />
+    <Compile Include="Tables\OrderWelfareItemData.cs" />
+    <Compile Include="Tables\PlanMaterialClassData.cs" />
+    <Compile Include="Tables\PlanMaterialDivisionData.cs" />
+    <Compile Include="Tables\PlanMaterialItemData.cs" />
+    <Compile Include="Tables\PlanOrderCouncilData.cs" />
+    <Compile Include="Tables\PlanToolsDivisionData.cs" />
+    <Compile Include="Tables\PlanToolsItemData.cs" />
+    <Compile Include="Tables\POItemData.cs" />
+    <Compile Include="Tables\PrepareTimeData.cs" />
+    <Compile Include="Tables\PrePOData.cs" />
+    <Compile Include="Tables\PrePODivisionData.cs" />
+    <Compile Include="Tables\PrePODuedateData.cs" />
+    <Compile Include="Tables\PrePOItemData.cs" />
+    <Compile Include="Tables\ReceiveData.cs" />
+    <Compile Include="Tables\ReceiveItemData.cs" />
+    <Compile Include="Tables\StdMenuDiseaseData.cs" />
+    <Compile Include="Tables\StdMenuItemData.cs" />
+    <Compile Include="Tables\StdTimeTableData.cs" />
+    <Compile Include="Tables\StockCheckData.cs" />
+    <Compile Include="Tables\StockCheckItemData.cs" />
+    <Compile Include="Tables\StockInData.cs" />
+    <Compile Include="Tables\StockinItemData.cs" />
+    <Compile Include="Tables\StockoutitemData.cs" />
+    <Compile Include="Tables\SupplierData.cs" />
+    <Compile Include="Tables\SysconfigData.cs" />
+    <Compile Include="Tables\StockOutData.cs" />
+    <Compile Include="Tables\TitleData.cs" />
+    <Compile Include="Tables\UnitData.cs" />
+    <Compile Include="Tables\WardData.cs" />
+    <Compile Include="Tables\WelfareRealServiceData.cs" />
+    <Compile Include="Tables\ZRoleAssignData.cs" />
+    <Compile Include="Tables\ZRoleData.cs" />
+    <Compile Include="Views\VAdmitPatientData.cs" />
+    <Compile Include="Views\VCutOrderSearchData.cs" />
+    <Compile Include="Views\VDiseaseCategoryData.cs" />
+    <Compile Include="Views\VDivisionSearchData.cs" />
+    <Compile Include="Views\VFoodTypePriceData.cs" />
+    <Compile Include="Views\VFormulafeedNutrientData.cs" />
+    <Compile Include="Views\VFormulaMilkData.cs" />
+    <Compile Include="Views\VFormulaMilkListData.cs" />
+    <Compile Include="Views\VFormulaMilkNutrientData.cs" />
+    <Compile Include="Views\VFormularMDSearchData.cs" />
+    <Compile Include="Views\VFormulaSetSearchData.cs" />
+    <Compile Include="Views\VGroupPermissionsearchData.cs" />
+    <Compile Include="Views\VHolidayData.cs" />
+    <Compile Include="Views\VMaterialClassData.cs" />
+    <Compile Include="Views\VMaterialGroupData.cs" />
+    <Compile Include="Views\VMaterialMasterData.cs" />
+    <Compile Include="Views\VMaterialMasterUnitData.cs" />
+    <Compile Include="Views\VMaterialStockoutWasteData.cs" />
+    <Compile Include="Views\VMedFeedChargeData.cs" />
+    <Compile Include="Views\VMenuFormulaListData.cs" />
+    <Compile Include="Views\VMilkCodeData.cs" />
+    <Compile Include="Views\VMilkCodeSearchData.cs" />
+    <Compile Include="Views\VNutrientData.cs" />
+    <Compile Include="Views\VOfficerData.cs" />
+    <Compile Include="Views\VOrderChangeData.cs" />
+    <Compile Include="Views\VOrderDetailItemData.cs" />
+    <Compile Include="Views\VOrderFeedSlipData.cs" />
+    <Compile Include="Views\VOrderFeedWaitRegisterData.cs" />
+    <Compile Include="Views\VOrderMilkWaitRegisterData.cs" />
+    <Compile Include="Views\VOrderNpoData.cs" />
+    <Compile Include="Views\VOrderPartyData.cs" />
+    <Compile Include="Views\VOrderPartySearchData.cs" />
+    <Compile Include="Views\VOrderSetSlipData.cs" />
+    <Compile Include="Views\VOrderWaitRegisterData.cs" />
+    <Compile Include="Views\VPlanFoodMaterialData.cs" />
+    <Compile Include="Views\VPOData.cs" />
+    <Compile Include="Views\VPrePoDivisionMaterialData.cs" />
+    <Compile Include="Views\VPrePOMaterialClassData.cs" />
+    <Compile Include="Views\VPrePOReceiveData.cs" />
+    <Compile Include="Views\VReceiveData.cs" />
+    <Compile Include="Views\VReceiveMaterialData.cs" />
+    <Compile Include="Views\VRepairrequestData.cs" />
+    <Compile Include="Views\VRetrunRequestPopupData.cs" />
+    <Compile Include="Views\VReturnWarehouseData.cs" />
+    <Compile Include="Views\VSendPreOrderSupplierPopupData.cs" />
+    <Compile Include="Views\VStockCheckAuditListData.cs" />
+    <Compile Include="Views\VStockCheckCountData.cs" />
+    <Compile Include="Views\VStockInData.cs" />
+    <Compile Include="Views\VStockinFoodPopupData.cs" />
+    <Compile Include="Views\VStockinItemData.cs" />
+    <Compile Include="Views\VStockinitemPoData.cs" />
+    <Compile Include="Views\VStockinToolsPopupData.cs" />
+    <Compile Include="Views\VStockOutData.cs" />
+    <Compile Include="Views\VStockoutItemData.cs" />
+    <Compile Include="Search\VStockoutReturenPopUpData.cs" />
+    <Compile Include="Views\VStockRemainData.cs" />
+    <Compile Include="Views\VSystemMenuSearchData.cs" />
+    <Compile Include="Views\VToDoListMinStockData.cs" />
+    <Compile Include="Views\VWardResponseData.cs" />
+    <Compile Include="Views\VWardSearchData.cs" />
+    <Compile Include="Views\VWelfareRightData.cs" />
+    <Compile Include="Views\VWelfareRightItemData.cs" />
+    <Compile Include="Views\VZMenuData.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{967B4E0D-AD0C-4609-AB67-0FA40C0206D8}" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

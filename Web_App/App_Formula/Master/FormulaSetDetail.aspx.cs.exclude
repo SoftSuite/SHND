@@ -1,0 +1,597 @@
+using System;
+using System.Data;
+using System.Configuration;
+using System.Collections;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Web.UI.HtmlControls;
+using SHND.Data.Common.Utilities;
+using SHND.Data.Formula;
+using SHND.Data.Tables;
+using SHND.Data.Views;
+using SHND.Flow.Formula;
+using SHND.Global;
+
+/// <summary>
+/// Formula Set Detail Page Class
+/// Version 1.0
+/// =========================================================================
+/// Create by: Teang
+/// Create Date: 5 Jan 2009
+/// -------------------------------------------------------------------------
+/// Modify By: -
+/// Modify From: -
+/// Modify Date: -
+/// -------------------------------------------------------------------------
+/// Remark: -
+/// Description:
+///    หน้ากาารทำงานข้อมูล Frmula set Detail
+/// Changes:
+///    1.0 - สร้าง
+/// -------------------------------------------------------------------------
+/// =========================================================================
+/// </summary>
+/// 
+public partial class App_Formula_Master_FormulaSetDetail : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            doGetDetail((Request["loid"] == null ? "0" : Request["loid"]), "");
+        }
+    }
+
+    protected override void OnInit(EventArgs e)
+    {
+        base.OnInit(e);
+
+        // set Combo source
+        Appz.BuildCombo(cmbFoodType, "FOODTYPE", "NAME", "LOID", "ACTIVE='1'", "NAME", "เลือก", "0", false);
+        Appz.BuildCombo(cmbFoodCategory, "FOODCATEGORY", "NAME", "LOID", "ACTIVE='1'", "NAME", "เลือก", "0", false);
+        Appz.BuildCombo(cmbFoodCookType, "FOODCOOKTYPE", "NAME", "LOID", "ACTIVE='1'", "NAME", "เลือก", "0", false);
+        Appz.BuildCombo(cmbDishesType, "DISHESTYPE", "NAME", "LOID", "ACTIVE='1'", "NAME", "เลือก", "0", false);
+        Appz.BuildCombo(cmbPackage, "V_MATERIALMASTER", "NAME", "LOID", "ACTIVE='1' AND MASTERTYPE = 'TL'", "NAME", "เลือก", "0", false);
+
+        ControlUtil.SetIntTextBox(txtPortion);
+        ControlUtil.SetIntTextBox(txtEnergy);
+        ControlUtil.SetDblTextBox(txtWeightFormula);
+        ControlUtil.SetDblTextBox(txtWeightPortion);
+        this.txtCurentTab.Text = this.tabFormulaSet.ActiveTabIndex.ToString();
+        this.tbDeleteFormulaSetItem.ClientClick = "return confirm('" + DataResources.MSGCD003 + "')";
+        this.tbDeleteRefFormulaSet.ClientClick = "return confirm('" + DataResources.MSGCD003 + "')";
+        this.tbDeleteFormulaDisease.ClientClick = "return confirm('" + DataResources.MSGCD003 + "')";
+    }
+
+    protected void tabFormulaSet_ActiveTabChanged(object sender, EventArgs e)
+    {
+        if (this.txtStatus.Text != "AP" && this.txtStatus.Text != "NA")
+        {
+            if (!doSave(this.txtCurentTab.Text))
+                this.tabFormulaSet.ActiveTabIndex = Convert.ToInt32(this.txtCurentTab.Text);
+        }
+        else
+        {
+            this.ctlAttach.UniqID = this.txtLOID.Text;
+            this.ctlAttach.ReadOnly = true;
+        }
+    }
+
+    protected void ctlMaterialMasterPopup_SelectedIndexChanged(object sender, EventArgs e, ArrayList arrData)
+    {
+        FormulaSetDetailItem fsItem = new FormulaSetDetailItem();
+        if (fsItem.InsertFormulaSetItem(Convert.ToDouble("0" + this.txtLOID.Text), arrData))
+            BindFormulaSetItem();
+    }
+
+    protected void vtlFormulaSetPopup_SelectedIndexChanged(object sender, EventArgs e, ArrayList arrData)
+    {
+        FormulaSetDetailItem fsItem = new FormulaSetDetailItem();
+        if (fsItem.InsertRefFormulaSet(Convert.ToDouble("0" + this.txtLOID.Text), arrData))
+            BindRefFormulaSet();
+    }
+
+    protected void ctlDiseaseCategoryPopup_SelectedIndexChanged(object sender, EventArgs e, ArrayList arrData)
+    {
+        FormulaSetDetailItem fsItem = new FormulaSetDetailItem();
+        if (fsItem.InsertFormulaDisease(Convert.ToDouble("0" + this.txtLOID.Text), arrData))
+            BindFormulaDisease();
+    }
+
+    #region Button Click Event Handler
+
+    #region Main Toolbar
+    protected void tbSaveClick(object sender, EventArgs e)
+    {
+        doSave(this.txtCurentTab.Text);
+    }
+    protected void tbCancelClick(object sender, EventArgs e)
+    {
+        doGetDetail("0" + this.txtLOID.Text, "");
+    }
+    protected void tbBackClick(object sender, EventArgs e)
+    {
+        Response.Redirect(Constant.HomeFolder + "App_Formula/Master/FormulaSet.aspx");
+    }
+    protected void tbTestClick(object sender, EventArgs e)
+    {
+        this.txtStatus.Text = "TE";
+        doSave(this.txtCurentTab.Text);
+    }
+    protected void tbApproveClick(object sender, EventArgs e)
+    {
+        this.txtStatus.Text = "AP";
+        doSave(this.txtCurentTab.Text);
+    }
+    protected void tbNotApproveClick(object sender, EventArgs e)
+    {
+        this.txtStatus.Text = "NA";
+        doSave(this.txtCurentTab.Text);
+    }
+    #endregion
+
+    #region FormulaSetItem Toolbar
+    protected void tbAddFormulaSetItemClick(object sender, EventArgs e)
+    {
+        UpdateFormulaSetItem();
+        FormulaSetDetailItem fsItem = new FormulaSetDetailItem();
+        this.ctlMaterialMasterPopup.Show("1", fsItem.getMaterialList());
+    }
+    protected void tbDeleteFormulaSetItemClick(object sender, EventArgs e)
+    {
+        UpdateFormulaSetItem();
+        FormulaSetDetailItem fsItem = new FormulaSetDetailItem();
+        if (fsItem.DeleteFormulaSetItem(GetCheckedFormulaSetItem())) BindFormulaSetItem();
+    }
+    #endregion
+
+    #region RefFormulaSet Toolbar
+    protected void tbAddRefFormulaSetClick(object sender, EventArgs e)
+    {
+        FormulaSetDetailItem fsItem = new FormulaSetDetailItem();
+        this.ctlFormulaSetPopup.Show(fsItem.GetRefFormulaList());
+    }
+    protected void tbDeleteRefFormulaSetClick(object sender, EventArgs e)
+    {
+        FormulaSetDetailItem fsItem = new FormulaSetDetailItem();
+        if (fsItem.DeleteRefFormulaSet(GetCheckedRefFormula())) BindRefFormulaSet();
+    }
+    #endregion
+
+    #region FormulaDisease Toolbar
+    protected void tbAddFormulaDiseaseClick(object sender, EventArgs e)
+    {
+        FormulaSetDetailItem fsItem = new FormulaSetDetailItem();
+        this.ctlDiseaseCategoryPopup.Show(fsItem.GetDiseaseCategoryList());
+    }
+    protected void tbDeleteFormulaDiseaseClick(object sender, EventArgs e)
+    {
+        FormulaSetDetailItem fsItem = new FormulaSetDetailItem();
+        if (fsItem.DeleteFormulaDisease(GetCheckedFormulaDisease())) BindFormulaDisease();
+    }
+    #endregion
+
+    #endregion
+
+    #region Gridview Event Handler
+
+    protected void gvRefFormula_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            FormulaSetDetailItem fsItem = new FormulaSetDetailItem();
+            ((GridView)e.Row.Cells[2].FindControl("gvRefFormulaSetItem")).DataSource = fsItem.GetRefFormulaSetItemList(Convert.ToDouble("0" + this.txtLOID.Text), Convert.ToDouble("0" + ((TextBox)e.Row.Cells[2].FindControl("txtRefFormula")).Text));
+            ((GridView)e.Row.Cells[2].FindControl("gvRefFormulaSetItem")).DataBind();
+        }
+    }
+
+    #endregion
+
+    #region Misc. Methods
+
+    private ArrayList GetCheckedFormulaSetItem()
+    {
+        ArrayList arrChk = new ArrayList();
+        for (int i = 0; i < gvFormulaSetItem.Rows.Count; i++)
+        {
+            if (i > -1 && gvFormulaSetItem.Rows[i].Cells[0].FindControl("chkSelect") != null)
+            {
+                GridViewRow gRow = gvFormulaSetItem.Rows[i];
+                if (((CheckBox)gRow.Cells[1].FindControl("chkSelect")).Checked)
+                {
+                    arrChk.Add(Convert.ToDouble(gRow.Cells[0].Text));
+                }
+            }
+        }
+        return arrChk;
+    }
+
+    private ArrayList GetCheckedRefFormula()
+    {
+        ArrayList arrChk = new ArrayList();
+        for (int i = 0; i < gvRefFormula.Rows.Count; i++)
+        {
+            if (i > -1 && gvRefFormula.Rows[i].Cells[0].FindControl("chkSelect") != null)
+            {
+                GridViewRow gRow = gvRefFormula.Rows[i];
+                if (((CheckBox)gRow.Cells[1].FindControl("chkSelect")).Checked)
+                {
+                    arrChk.Add(Convert.ToDouble(gRow.Cells[0].Text));
+                }
+            }
+        }
+        return arrChk;
+    }
+
+    private ArrayList GetCheckedFormulaDisease()
+    {
+        ArrayList arrChk = new ArrayList();
+        for (int i = 0; i < gvFormulaDisease.Rows.Count; i++)
+        {
+            if (i > -1 && gvFormulaDisease.Rows[i].Cells[0].FindControl("chkSelect") != null)
+            {
+                GridViewRow gRow = gvFormulaDisease.Rows[i];
+                if (((CheckBox)gRow.Cells[1].FindControl("chkSelect")).Checked)
+                {
+                    arrChk.Add(Convert.ToDouble(gRow.Cells[0].Text));
+                }
+            }
+        }
+        return arrChk;
+    }
+
+    #endregion
+
+    #region Controls Management Methods
+
+    private void BindFormulaSetItem()
+    {
+        this.gvFormulaSetItem.DataBind();
+    }
+
+    private void BindRefFormulaSet()
+    {
+        this.gvRefFormula.DataBind();
+    }
+
+    private void BindFormulaServe()
+    {
+        this.gvFormulaServe.DataBind();
+    }
+
+    private void BindFormulaDisease()
+    {
+        this.gvFormulaDisease.DataBind();
+    }
+
+    private void SetErrorStatusFormulaSetItem(string t)
+    {
+        lbStatusFormulaSetItem.Text = t;
+        lbStatusFormulaSetItem.ForeColor = Constant.StatusColor.Error;
+    }
+
+    private void SetStatusFormulaSetItem(string t)
+    {
+        lbStatusFormulaSetItem.Text = t;
+        lbStatusFormulaSetItem.ForeColor = Constant.StatusColor.Information;
+    }
+
+    private void SetErrorStatusRefFormulaSet(string t)
+    {
+        lbStatusRefFormulaSet.Text = t;
+        lbStatusRefFormulaSet.ForeColor = Constant.StatusColor.Error;
+    }
+
+    private void SetErrorStatusFormulaDisease(string t)
+    {
+        lbStatusFormulaDisease.Text = t;
+        lbStatusFormulaDisease.ForeColor = Constant.StatusColor.Error;
+    }
+
+    private void SetStatus(string t)
+    {
+        lbStatus.Text = t;
+        lbStatus.ForeColor = Constant.StatusColor.Information;
+    }
+
+    private void SetErrorStatus(string t)
+    {
+        lbStatus.Text = t;
+        lbStatus.ForeColor = Constant.StatusColor.Error;
+    }
+
+    private ArrayList GetFormulaSetItem()
+    {
+        ArrayList arrData = new ArrayList();
+        for (int i = 0; i < this.gvFormulaSetItem.Rows.Count; ++i)
+        {
+            FormulaSetItemData FormulaSetItem = new FormulaSetItemData();
+            FormulaSetItem.ENERGY = Convert.ToDouble("0" + this.gvFormulaSetItem.Rows[i].Cells[9].Text);
+            FormulaSetItem.FORMULASET = Convert.ToDouble("0" + this.txtLOID.Text);
+            FormulaSetItem.MATERIALMASTER = Convert.ToDouble("0" + this.gvFormulaSetItem.Rows[i].Cells[14].Text);
+            FormulaSetItem.PREPARENAME = ((TextBox)this.gvFormulaSetItem.Rows[i].Cells[6].FindControl("txtPrepareNameEdit")).Text;
+            FormulaSetItem.REFFORMULA = 0;
+            FormulaSetItem.WEIGHTRIPE = Convert.ToDouble("0" + ((TextBox)this.gvFormulaSetItem.Rows[i].Cells[7].FindControl("txtWeightRipeEdit")).Text);
+            FormulaSetItem.WEIGHTRAW = Convert.ToDouble("0" + ((TextBox)this.gvFormulaSetItem.Rows[i].Cells[8].FindControl("txtWeightRawEdit")).Text);
+            FormulaSetItem.LOID = Convert.ToDouble("0" + this.gvFormulaSetItem.Rows[i].Cells[1].Text);
+            FormulaSetItem.WEIGHT = Convert.ToDouble("0" + ((TextBox)this.gvFormulaSetItem.Rows[i].Cells[5].FindControl("txtWeightEdit")).Text);
+
+            arrData.Add(FormulaSetItem);
+        }
+        return arrData;
+    }
+
+    private ArrayList GetFormulaServeItem()
+    {
+        ArrayList arrData = new ArrayList();
+        for (int i = 0; i < this.gvFormulaServe.Rows.Count; ++i)
+        {
+            FormulaServeData FormulaServe = new FormulaServeData();
+            FormulaServe.FORMULASET = Convert.ToDouble("0" + this.txtLOID.Text);
+            FormulaServe.LOID = Convert.ToDouble("0" + this.gvFormulaServe.Rows[i].Cells[0].Text);
+            FormulaServe.REFLOID = Convert.ToDouble("0" + this.gvFormulaServe.Rows[i].Cells[7].Text);
+            FormulaServe.REFTABLE = this.gvFormulaServe.Rows[i].Cells[6].Text;
+            FormulaServe.WEIGHTRAW = Convert.ToDouble("0" + ((TextBox)this.gvFormulaServe.Rows[i].Cells[4].FindControl("txtWeightRawEdit")).Text);
+            FormulaServe.WEIGHTRIPE = Convert.ToDouble("0" + this.gvFormulaServe.Rows[i].Cells[5].Text);
+            arrData.Add(FormulaServe);
+        }
+        return arrData;
+    }
+
+    private FormulaSetDetailData GetData()
+    {
+        FormulaSetDetailData fsData = new FormulaSetDetailData();
+        fsData.ACTIVE = this.chkActive.Checked;
+        fsData.DISHESTYPE = Convert.ToDouble(this.cmbDishesType.SelectedItem.Value);
+        fsData.ENERGY = Convert.ToDouble("0" + this.txtEnergy.Text);
+        fsData.FOODCATEGORY = Convert.ToDouble(this.cmbFoodCategory.SelectedItem.Value);
+        fsData.FOODCOOKTYPE = Convert.ToDouble(this.cmbFoodCookType.SelectedItem.Value);
+        fsData.FOODTYPE = Convert.ToDouble(this.cmbFoodType.SelectedItem.Value);
+        fsData.IMGPATH = "";
+        fsData.ISELEMENT = this.chkIsElement.Checked;
+        fsData.ISONEDISH = this.chkIsOneDish.Checked;
+        fsData.ISSPECIFIC = this.chkIsSpecific.Checked;
+        fsData.LOID = Convert.ToDouble("0" + this.txtLOID.Text);
+        fsData.NAME = this.txtName.Text.Trim();
+        fsData.PACKAGE = Convert.ToDouble(this.cmbPackage.SelectedItem.Value);
+        fsData.PORTION = Convert.ToDouble("0" + this.txtPortion.Text);
+        fsData.PREPARE = this.txtPrepare.Text.Trim();
+        fsData.RECIPE = this.txtRecipe.Text.Trim();
+        fsData.SERVEMETHOD = this.txtServeMethod.Text.Trim();
+        fsData.STATUS = this.txtStatus.Text.Trim();
+        fsData.WEIGHTFORMULA = Convert.ToDouble("0" + this.txtWeightFormula.Text);
+        fsData.WEIGHTPORTION = Convert.ToDouble("0" + this.txtWeightPortion.Text);
+
+        FormulaSetDetailItem item = new FormulaSetDetailItem();
+        switch (this.txtCurentTab.Text)
+        {
+            case "0" :
+                fsData.FormulaSetItem = GetFormulaSetItem();
+                fsData.RefFormulaSet = item.GetRefFormulasetItemData();
+                break;
+            case "1":
+                fsData.FormulaServe = GetFormulaServeItem();
+                break;
+            case "2" :
+                fsData.FormulaDisease = item.GetFormulasetDiseaseData();
+                break;
+        }
+        return fsData;
+    }
+
+    private void SetData(FormulaSetDetailData fsData)
+    {
+        this.chkActive.Checked = fsData.ACTIVE;
+        this.cmbDishesType.SelectedIndex = this.cmbDishesType.Items.IndexOf(this.cmbDishesType.Items.FindByValue(fsData.DISHESTYPE.ToString()));
+        this.txtEnergy.Text = fsData.ENERGY.ToString(Constant.IntFormat);
+        this.cmbFoodCategory.SelectedIndex = this.cmbFoodCategory.Items.IndexOf(this.cmbFoodCategory.Items.FindByValue(fsData.FOODCATEGORY.ToString()));
+        this.cmbFoodCookType.SelectedIndex = this.cmbFoodCookType.Items.IndexOf(this.cmbFoodCookType.Items.FindByValue(fsData.FOODCOOKTYPE.ToString()));
+        this.cmbFoodType.SelectedIndex = this.cmbFoodType.Items.IndexOf(this.cmbFoodType.Items.FindByValue(fsData.FOODTYPE.ToString()));
+        this.chkIsElement.Checked = fsData.ISELEMENT;
+        this.chkIsOneDish.Checked = fsData.ISONEDISH;
+        this.chkIsSpecific.Checked = fsData.ISSPECIFIC;
+        this.txtLOID.Text = fsData.LOID.ToString();
+        this.txtName.Text = fsData.NAME;
+        this.cmbPackage.SelectedIndex = this.cmbPackage.Items.IndexOf(this.cmbPackage.Items.FindByValue(fsData.PACKAGE.ToString()));
+        this.txtPortion.Text = fsData.PORTION.ToString(Constant.IntFormat);
+        this.txtPrepare.Text = fsData.PREPARE;
+        this.txtRecipe.Text = fsData.RECIPE;
+        this.txtServeMethod.Text = fsData.SERVEMETHOD;
+        this.txtStatus.Text = fsData.STATUS;
+        this.txtStatusName.Text = fsData.STATUSNAME;
+        this.txtWeightFormula.Text = fsData.WEIGHTFORMULA.ToString(Constant.DoubleFormat);
+        this.txtWeightPortion.Text = fsData.WEIGHTPORTION.ToString(Constant.DoubleFormat);
+        this.ctlAttach.UniqID = fsData.LOID.ToString();
+
+        this.tbPrint.ClientClick = Appz.OpenReportScript(Constant.Reports.FormulaSetReport, fsData.LOID, false);
+
+        FormulaSetDetailItem fsItem = new FormulaSetDetailItem();
+        switch (this.txtCurentTab.Text)
+        {
+            case "0":
+                fsItem.ClearFormulaSetItem();
+                fsItem.ClearRefFormulaSet();
+                BindFormulaSetItem();
+                BindRefFormulaSet();
+                break;
+            case "1":
+                fsItem.ClearFormulaServe();
+                BindFormulaServe();
+                break;
+            case "2":
+                fsItem.ClearFormulaDisease();
+                BindFormulaDisease();
+                break;
+            case "3":
+                this.gvFormulaSetNutrient.DataBind();
+                break;
+            default:
+                fsItem.ClearAllSession();
+                BindFormulaSetItem();
+                BindRefFormulaSet();
+                BindFormulaServe();
+                BindFormulaDisease();
+                break;
+        }
+
+        this.tbApprove.Visible = (fsData.STATUS == "TE");
+        this.tbCancel.Visible = (fsData.STATUS == "WA" || fsData.STATUS == "TE");
+        this.tbNotApprove.Visible = (fsData.STATUS == "TE");
+        this.tbPrint.Visible = (fsData.LOID != 0);
+        this.tbSave.Visible = (fsData.STATUS == "WA" || fsData.STATUS == "TE");
+        this.tbTest.Visible = (fsData.STATUS == "WA");
+
+        if (fsData.STATUS == "AP" || fsData.STATUS == "NA")
+        {
+            this.txtName.ReadOnly = true;
+            this.txtName.CssClass = "zTextbox-View";
+            this.cmbDishesType.Enabled = false;
+            this.cmbFoodCategory.Enabled = false;
+            this.cmbFoodCookType.Enabled = false;
+            this.cmbFoodType.Enabled = false;
+            this.cmbPackage.Enabled = false;
+            this.txtPortion.ReadOnly = true;
+            this.txtPortion.CssClass = "zTextboxR-View";
+            this.txtRecipe.ReadOnly = true;
+            this.txtRecipe.CssClass = "zTextbox-View";
+            this.txtServeMethod.ReadOnly = true;
+            this.txtServeMethod.CssClass = "zTextbox-View";
+            this.txtEnergy.ReadOnly = true;
+            this.txtEnergy.CssClass = "zTextboxR-View";
+            this.txtWeightFormula.ReadOnly = true;
+            this.txtWeightFormula.CssClass = "zTextboxR-View";
+            this.txtWeightPortion.ReadOnly = true;
+            this.txtWeightPortion.CssClass = "zTextboxR-View";
+            this.txtPrepare.ReadOnly = true;
+            this.txtPrepare.CssClass = "zTextbox-View";
+            this.chkActive.Enabled = false;
+            this.chkIsElement.Enabled = false;
+            this.chkIsOneDish.Enabled = false;
+            this.chkIsSpecific.Enabled = false;
+
+            tbAddFormulaSetItem.Visible = false;
+            tbDeleteFormulaSetItem.Visible = false;
+            this.gvFormulaSetItem.Columns[2].Visible = false;
+
+            tbAddRefFormulaSet.Visible = false;
+            tbDeleteRefFormulaSet.Visible = false;
+            this.gvRefFormula.Columns[1].Visible = false;
+
+            this.gvFormulaServe.ShowFooter = false;
+            this.gvFormulaServe.Columns[1].Visible = false;
+
+            tbAddFormulaDisease.Visible = false;
+            tbDeleteFormulaDisease.Visible = false;
+            this.gvFormulaDisease.Columns[1].Visible = false;
+
+            this.ctlAttach.ReadOnly = true;
+        }
+    }
+
+    #endregion
+
+    #region Working Method
+
+    private void UpdateFormulaSetItem()
+    {
+        FormulaSetDetailItem fsItem = new FormulaSetDetailItem();
+        if (!fsItem.UpdateFormulaSetItem(Convert.ToDouble("0" + this.txtLOID.Text), GetFormulaSetItem()))
+            SetErrorStatusFormulaSetItem(DataResources.MSGEC102);
+        else
+            SetStatusFormulaSetItem(DataResources.MSGIU001);
+    }
+
+    private bool doGetDetail(string LOID, string CurrentTabIndex)
+    {
+        FormulaSetFlow fFlow = new FormulaSetFlow();
+        FormulaSetDetailData fData = fFlow.GetDetails(Convert.ToDouble(LOID));
+
+        bool ret = true;
+        SetData(fData);
+        return ret;
+    }
+
+    private bool doSave(string currentTabIndex)
+    {
+        // verify required field
+        FormulaSetDetailData FormulaSetDetail = GetData();
+        string error = VerifyData(FormulaSetDetail);
+        if (error != "")
+        {
+            SetErrorStatus(error);
+            return false;
+        }
+
+        FormulaSetFlow ftFlow = new FormulaSetFlow();
+        bool ret = true;
+
+        // verify uniq field
+        if (!ftFlow.CheckUniqueKey(FormulaSetDetail.LOID, FormulaSetDetail.NAME, FormulaSetDetail.FOODTYPE, FormulaSetDetail.FOODCATEGORY, FormulaSetDetail.PORTION))
+        {
+            SetErrorStatus(string.Format(DataResources.MSGEI016, "ชื่อสูตรอาหาร", FormulaSetDetail.NAME, "ประเภทอาหาร \"" + this.cmbFoodType.SelectedItem.Text + "\", ชนิดอาหาร \"" + this.cmbFoodCategory.SelectedItem.Text + "\" และ Potion \"" + this.txtPortion.Text + "\""));
+            return false;
+        }
+
+        // data correct go on saving...
+        if (FormulaSetDetail.LOID != 0)
+            ret = ftFlow.UpdateData(FormulaSetDetail, Appz.CurrentUser, currentTabIndex);
+        else
+            ret = ftFlow.InsertData(FormulaSetDetail, Appz.CurrentUser, currentTabIndex);
+
+        if (!ret)
+            SetErrorStatus(ftFlow.ErrorMessage);
+        else
+        {
+            this.txtCurentTab.Text = this.tabFormulaSet.ActiveTabIndex.ToString();
+            doGetDetail(ftFlow.LOID.ToString(), this.txtCurentTab.Text);
+            if (FormulaSetDetail.LOID != 0)
+                SetStatus(DataResources.MSGIN001);
+            else
+                SetStatus(DataResources.MSGIU001);
+        }
+
+        return ret;
+    }
+
+    private string VerifyData(FormulaSetDetailData fData)
+    {
+        string ret = "";
+        if (fData.NAME == "")
+            ret = string.Format(DataResources.MSGEI001, "ชื่อสูตรอาหาร");
+        else if (fData.FOODTYPE == 0)
+            ret = string.Format(DataResources.MSGEI002, "ประเภทอาหาร");
+        else if (fData.FOODCATEGORY == 0)
+            ret = string.Format(DataResources.MSGEI002, "ชนิดอาหาร");
+        else if (fData.PORTION == 0)
+            ret = string.Format(DataResources.MSGEI001, "Portion");
+        else if (fData.ENERGY == 0)
+            ret = string.Format(DataResources.MSGEI001, "พลังงานที่ได้รับ");
+        else if (fData.WEIGHTFORMULA == 0)
+            ret = string.Format(DataResources.MSGEI001, "น้ำหนักรวมสูตร");
+        else if (fData.WEIGHTPORTION == 0)
+            ret = string.Format(DataResources.MSGEI001, "น้ำหนักรวม Portion");
+        else if (fData.FormulaSetItem.Count == 0 && this.txtCurentTab.Text == "0")
+            ret = string.Format(DataResources.MSGEI001, "วัตถุดิบในสูตรอาหาร");
+        else if (this.txtCurentTab.Text == "0")
+        {
+            for (int i = 0; i < fData.FormulaSetItem.Count; ++i)
+            {
+                FormulaSetItemData FormulaSetItem = (FormulaSetItemData)fData.FormulaSetItem[i];
+                if (FormulaSetItem.PREPARENAME == "")
+                    ret = string.Format(DataResources.MSGEI001, "ชื่อในการเตรียม");
+                else if (FormulaSetItem.WEIGHT == 0)
+                    ret = string.Format(DataResources.MSGEI001, "น้ำหนักเบิก");
+
+                if (ret != "") break;
+            }
+        }
+
+        return ret;
+    }
+
+    #endregion
+
+}

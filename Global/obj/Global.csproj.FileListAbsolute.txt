@@ -1,0 +1,11 @@
+D:\MyProject\www\SHND\Global\bin\Debug\Global.dll
+D:\MyProject\www\SHND\Global\bin\Debug\Global.pdb
+D:\MyProject\www\SHND\Global\bin\Debug\Data.dll
+D:\MyProject\www\SHND\Global\bin\Debug\Flow.dll
+D:\MyProject\www\SHND\Global\bin\Debug\DAL.dll
+D:\MyProject\www\SHND\Global\bin\Debug\Flow.pdb
+D:\MyProject\www\SHND\Global\bin\Debug\DAL.pdb
+D:\MyProject\www\SHND\Global\bin\Debug\Data.pdb
+D:\MyProject\www\SHND\Global\obj\Debug\ResolveAssemblyReference.cache
+D:\MyProject\www\SHND\Global\obj\Debug\Global.dll
+D:\MyProject\www\SHND\Global\obj\Debug\Global.pdb

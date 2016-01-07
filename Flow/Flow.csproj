@@ -1,0 +1,160 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9512B82C-DBEB-43B0-8F47-4142D935F6DD}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SHND.Flow</RootNamespace>
+    <AssemblyName>Flow</AssemblyName>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Admin\CutOffTimeFlow.cs" />
+    <Compile Include="Admin\GroupPermissionSearchFlow.cs" />
+    <Compile Include="Admin\SystemMenuSearchFlow.cs" />
+    <Compile Include="Common\AppFLow.cs" />
+    <Compile Include="Common\AttachFlow.cs" />
+    <Compile Include="Common\CommboSourceFlow.cs" />
+    <Compile Include="Common\ErrorHandle.cs" />
+    <Compile Include="Common\MenuFlow.cs" />
+    <Compile Include="Common\UserFlow.cs" />
+    <Compile Include="Deliverly\TransferOrderFeedFlow.cs" />
+    <Compile Include="Deliverly\TransferOrderMilkFlow.cs" />
+    <Compile Include="Deliverly\TransferOrderSetFlow.cs" />
+    <Compile Include="Formula\BlenderizeDietFlow.cs" />
+    <Compile Include="Formula\DiseaseCategoryFlow.cs" />
+    <Compile Include="Formula\FoodCategoryFlow.cs" />
+    <Compile Include="Formula\FoodTypeFlow.cs" />
+    <Compile Include="Formula\FoodTypePriceFlow.cs" />
+    <Compile Include="Formula\FormulaFeedLDFlow.cs" />
+    <Compile Include="Formula\FormulaFeedMDFlow.cs" />
+    <Compile Include="Formula\FormulaMilkFlow.cs" />
+    <Compile Include="Formula\FormulaSetFlow.cs" />
+    <Compile Include="Formula\MenuFlow.cs" />
+    <Compile Include="Formula\MilkCategoryFlow.cs" />
+    <Compile Include="Formula\NutrientFlow.cs" />
+    <Compile Include="Formula\StandardMenuFlow.cs" />
+    <Compile Include="Inventory\RepairFlow.cs" />
+    <Compile Include="Inventory\DivisionSearchFlow.cs" />
+    <Compile Include="Inventory\HolidayFlow.cs" />
+    <Compile Include="Inventory\MaterialClassFlow.cs" />
+    <Compile Include="Inventory\MaterialFeedFlow.cs" />
+    <Compile Include="Inventory\MaterialFoodSearchFlow.cs" />
+    <Compile Include="Inventory\MaterialGroupFlow.cs" />
+    <Compile Include="Inventory\MaterialToolFlow.cs" />
+    <Compile Include="Inventory\MilkCodeFlow.cs" />
+    <Compile Include="Inventory\RepairRequestFlow.cs" />
+    <Compile Include="Inventory\ReturnRequestFlow.cs" />
+    <Compile Include="Inventory\ReturnWarehouseFlow.cs" />
+    <Compile Include="Inventory\SendSupplierFlow.cs" />
+    <Compile Include="Inventory\StockCheckAuditFlow.cs" />
+    <Compile Include="Inventory\StockCheckCounterFlow.cs" />
+    <Compile Include="Inventory\StockCheckHeadFlow.cs" />
+    <Compile Include="Inventory\StockInFlow.cs" />
+    <Compile Include="Inventory\StockInOtherFlow.cs" />
+    <Compile Include="Inventory\StockOutFlow.cs" />
+    <Compile Include="Inventory\StockOutRequestFlow.cs" />
+    <Compile Include="Inventory\StockoutWasteFlow.cs" />
+    <Compile Include="Inventory\StockWasteSearchFlow.cs" />
+    <Compile Include="Inventory\SupplierFlow.cs" />
+    <Compile Include="Inventory\ToDoListFlow.cs" />
+    <Compile Include="Inventory\UnitFlow.cs" />
+    <Compile Include="Admin\WardFlow.cs" />
+    <Compile Include="Order\OrderFoodFlow.cs" />
+    <Compile Include="Order\OrderPartyFlow.cs" />
+    <Compile Include="Order\OrderWelfareFlow.cs" />
+    <Compile Include="Order\WelfareRightFlow.cs" />
+    <Compile Include="Plan\PlanContractFoodFlow.cs" />
+    <Compile Include="Plan\PlanContractToolsFlow.cs" />
+    <Compile Include="Plan\PlanOrderFoodDivisionFlow.cs" />
+    <Compile Include="Plan\PlanOrderFoodFlow.cs" />
+    <Compile Include="Plan\PlanOrderToolsDivisionFlow.cs" />
+    <Compile Include="Plan\PlanOrderToolsFlow.cs" />
+    <Compile Include="Plan\ToDoListRemainFlow.cs" />
+    <Compile Include="Prepare\ChangeOrderFlow.cs" />
+    <Compile Include="Prepare\CutOrderFlow.cs" />
+    <Compile Include="Prepare\WelRealServiceFlow.cs" />
+    <Compile Include="Prepare\MedFeedChargeFlow.cs" />
+    <Compile Include="Prepare\NpoOrderSetFlow.cs" />
+    <Compile Include="Prepare\OrderFeedSetFlow.cs" />
+    <Compile Include="Prepare\OrderMilkSetFlow.cs" />
+    <Compile Include="Prepare\OrderPatientSetFlow.cs" />
+    <Compile Include="Prepare\PreparePartyFlow.cs" />
+    <Compile Include="Prepare\PrepareReturnFlow.cs" />
+    <Compile Include="Prepare\PrepareWeightAfterFlow.cs" />
+    <Compile Include="Prepare\RegisterOrderFeedFlow.cs" />
+    <Compile Include="Prepare\RegisterOrderMilkFlow.cs" />
+    <Compile Include="Prepare\RegisterOrderSetFlow.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Purchase\POFlow.cs" />
+    <Compile Include="Purchase\PrePOFlow.cs" />
+    <Compile Include="Purchase\PrePODivisionItemFlow.cs" />
+    <Compile Include="Purchase\ReceiveFlow.cs" />
+    <Compile Include="Search\MaterialPrepareFlow.cs" />
+    <Compile Include="Search\SearchFlow.cs" />
+    <Compile Include="Utilities\BaseGenerateFlow.cs" />
+    <Compile Include="Utilities\OracleGenerateFlow.cs" />
+    <Compile Include="Utilities\SqlGenerateFlow.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{8945CB25-316B-40EC-83E5-00944A657DB9}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Data\Data.csproj">
+      <Project>{35E6306D-3445-4FA3-BAC5-268DE4AE995E}</Project>
+      <Name>Data</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

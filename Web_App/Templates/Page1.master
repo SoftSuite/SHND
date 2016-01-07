@@ -1,0 +1,218 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Page1.master.cs" Inherits="Template_Page1" %>
+<%@ Register Src="MenuCtl.ascx" TagName="MenuCtl" TagPrefix="uc1" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head id="Head1" runat="server">
+    <title>Untitled Page</title>
+    <link href="../Templates/BaseStyle.css" rel="stylesheet" type="text/css" />
+    <asp:ContentPlaceHolder ID="myPlaceholder" runat="server">
+        <script type="text/javascript" language='JavaScript' src='<%=Request.ApplicationPath %>/Templates/BaseScript.js'></script>
+        <script type="text/javascript" language='JavaScript'>
+        //check windows
+        if (window.name != 'SHNDSYSTEM') 
+        {
+            window.open(document.URL, 'SHNDSYSTEM', 'resizable=yes,scrollbars=yes,width=1015,height=700,status=yes');
+            document.location = '<%=Request.ApplicationPath%>/default.aspx';
+        }
+        </script>  
+    </asp:ContentPlaceHolder>
+<!--คุณสามารถแก้ไขตำแหน่งให้แสดง MENU ได้ครับ โดย แก้ไขตัวเลขที่ top ครับ-->
+<style>
+<!--
+
+#slidemenubar, #slidemenubar2{
+top:1px;
+position:absolute;
+font-weight:bold;
+border:1.5px solid green;
+background-color:#552288;
+layer-background-color:#552288;
+line-height:20px;
+}
+-->
+</style>          
+</head>
+
+<body style="margin:0" onload="draw()">
+ <iframe frameborder="0" style="position:absolute;z-index:20;width:1px;height:1px" name='menuFrame' id='menuFrame'>
+</iframe>
+   <form id="form1" runat="server">
+        <cc1:ToolkitScriptManager ID="smApplication" runat="server" EnableScriptGlobalization="true" EnableScriptLocalization="true" OnAsyncPostBackError="smApplication_AsyncPostBackError" /> 
+        <table width="100%" cellspacing="0" cellpadding="0" border="0" style="height:100%">
+            <tr>
+                <td>
+                    <table cellspacing="0" cellpadding="0" border="0" width="100%" style="height:75px; background-image:url(<%=Request.ApplicationPath%>/Images/themeBg.png); ">
+                        <tr>
+                            <td style="width:380px;" align="right" >
+                                <img src="<%=Request.ApplicationPath%>/Images/theme01.png" alt="" />
+                                </td>
+                                <td>&nbsp;</td>
+                            <td align="right" valign="bottom" style="background-image:url(<%=Request.ApplicationPath%>/Images/theme03.png); background-repeat:no-repeat; background-position:bottom left;" >
+                                <table border = "0" cellpadding="0" cellspacing="0" width="540">
+                                    <tr>
+                                        <td align="right" style="height: 5px">
+                                        </td>
+                                        <td align="right" style="height: 5px" width="60">
+                                            <asp:Label ID="lblVersion" runat="Server" Font-Size="7pt" ForeColor="#C0C0FF"></asp:Label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="right" style="height: 20px">
+                                        </td>
+                                        <td align="right" style="height: 20px" width="60">
+                                        </td>
+                                    </tr>
+                                    <tr style="height:25px">
+                                        <td align="right">
+                                    <asp:Label ID="lblUser" runat="server" Text="อัครวัฒน์ พุทธจันทร์ (System Admin)" CssClass="logindata"></asp:Label>
+                                        </td> 
+                                        <td width="60" align="right">
+                                            <asp:LoginStatus ID="LoginStatus1" runat="server" LoginText="" Font-Underline="false" CssClass="logoutbutton"
+                                                LogoutText="[Logout]" LogoutAction="RedirectToLoginPage" />
+                                        </td> 
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td style="height:3px">
+                </td> 
+            </tr> 
+           <tr>
+                <td>
+                    <table border="0" cellspacing="0" cellpadding="0" width="99%" align="left" height="100%" style="height:100%">
+                        <tr>
+                            <td style="width:20px; height:100%" valign="top">
+<script language="JavaScript1.2">
+//if (document.all)
+document.write('')
+</script>
+<!--<layer id="slidemenubar" onMouseover="pull()" onMouseout="draw()" style="background-color: #552288;">-->
+<div id="slidemenubar2" style="padding: 3px 3px 3px 3px; background-color:#552288;z-index:50;" onMouseover="pull()" onMouseout="draw()">
+                                        <asp:ContentPlaceHolder ID="MenuContent" runat="server">
+                                            <uc1:MenuCtl id="MenuCtl1" runat="server" EnableViewState="false">
+                                            </uc1:MenuCtl>
+                                        </asp:ContentPlaceHolder>
+</div>
+
+                            </td>
+                            <td style="width:4px" valign="top">&nbsp;
+                            </td>
+                            <td valign="top" style="padding:5px 5px 15px 5px; border-width:1px; border-color:#000099; border-style:solid; padding-bottom: 15px">
+                                <asp:UpdatePanel ID="UpdateMain" runat="server">
+                                    <ContentTemplate>
+                                        <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                                        </asp:ContentPlaceHolder>
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
+<script language="JavaScript1.2">
+// initial value
+mnu = document.getElementById('menuFrame');
+themenu = document.getElementById('slidemenubar2').style;
+rightboundary=0;
+if (document.all) {
+    window.onload=regenerate2
+}
+setValue();
+
+// working function
+
+function regenerate(){
+    window.location.reload()
+}
+function regenerate2(){
+    if (document.layers)
+        setTimeout("window.onresize=regenerate",400)
+}
+function setValue() {
+        leftboundary=-1 * (getWide() - 20);
+        mnu.style.height=getHeight();
+}
+
+function pull(){
+    setValue();
+    if (document.all) {
+        if (window.drawit)
+            clearInterval(drawit)
+        pullit=setInterval("pullengine()",2)
+    }
+    else 
+    {
+        themenu.left="0" + "px";
+    }
+}
+
+function draw(){
+    setValue();
+    if (document.all) {
+        clearInterval(pullit)
+        drawit=setInterval("drawengine()",2)
+    }
+    else
+    {
+        themenu.left= -1 * (getWide() - 20) + "px";
+    }
+}
+
+function pullengine(){
+    if (document.all&&themenu.pixelLeft<rightboundary) {
+        if (themenu.pixelLeft < -15) {
+           themenu.pixelLeft+=15;
+            mnu.style.pixelLeft+=15;
+           }
+         else {
+           themenu.pixelLeft = 0;
+           mnu.style.pixelLeft = 0;
+         }
+           
+    }
+    else if (window.pullit)
+        clearInterval(pullit)
+}
+
+function drawengine(){
+    if (document.all&&themenu.pixelLeft>leftboundary) {
+        if (themenu.pixelLeft - leftboundary < 15) {
+            themenu.pixelLeft = leftboundary;
+            mnu.style.pixelLeft = leftboundary;
+        }
+        else {
+            mnu.style.pixelLeft-=15;
+            themenu.pixelLeft-=15
+        }
+    }
+    else if (window.drawit)
+        clearInterval(drawit)
+}
+function getWide()
+{
+    return document.getElementById('slidemenubar2').offsetWidth;
+}
+function getHeight()
+{
+    return document.getElementById('slidemenubar2').offsetHeight;
+}
+
+themenu.top = "78px";
+if (getWide() > 20) 
+    themenu.left = -1 * (getWide() - 20) + "px";
+
+
+mnu.style.width=getWide();
+mnu.style.height=getHeight();
+mnu.style.top=themenu.top;
+mnu.style.left=themenu.left;
+</script>

@@ -1,0 +1,9 @@
+D:\MyProject\www\SHND\Flow\obj\Debug\ResolveAssemblyReference.cache
+D:\MyProject\www\SHND\Flow\obj\Debug\Flow.dll
+D:\MyProject\www\SHND\Flow\bin\Debug\Flow.dll
+D:\MyProject\www\SHND\Flow\bin\Debug\Flow.pdb
+D:\MyProject\www\SHND\Flow\bin\Debug\DAL.dll
+D:\MyProject\www\SHND\Flow\bin\Debug\Data.dll
+D:\MyProject\www\SHND\Flow\bin\Debug\DAL.pdb
+D:\MyProject\www\SHND\Flow\bin\Debug\Data.pdb
+D:\MyProject\www\SHND\Flow\obj\Debug\Flow.pdb

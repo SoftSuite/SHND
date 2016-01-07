@@ -1,0 +1,7 @@
+D:\MyProject\www\SHND\DAL\bin\Debug\DAL.dll
+D:\MyProject\www\SHND\DAL\bin\Debug\DAL.pdb
+D:\MyProject\www\SHND\DAL\bin\Debug\Data.dll
+D:\MyProject\www\SHND\DAL\bin\Debug\Data.pdb
+D:\MyProject\www\SHND\DAL\obj\Debug\ResolveAssemblyReference.cache
+D:\MyProject\www\SHND\DAL\obj\Debug\DAL.dll
+D:\MyProject\www\SHND\DAL\obj\Debug\DAL.pdb

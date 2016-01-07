@@ -1,0 +1,315 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{8945CB25-316B-40EC-83E5-00944A657DB9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SHND.DAL</RootNamespace>
+    <AssemblyName>DAL</AssemblyName>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Admin\CutOffTimeDAL.cs" />
+    <Compile Include="Common\AttachDAL.cs" />
+    <Compile Include="Common\ComboSourceDAL.cs" />
+    <Compile Include="Common\ZMenuDAL.cs" />
+    <Compile Include="Delivery\VTransferOrderFeedDAL.cs" />
+    <Compile Include="Delivery\VTransferOrderMilkDAL.cs" />
+    <Compile Include="Delivery\VTransferOrderSetDAL.cs" />
+    <Compile Include="Formula\FoodTypeDAL.cs" />
+    <Compile Include="Inventory\VMenuStockOutDAL.cs" />
+    <Compile Include="Order\VOrderMilkItemDAL.cs" />
+    <Compile Include="Order\VOrderPatientDAL.cs" />
+    <Compile Include="Plan\MenuDivisionDAL.cs" />
+    <Compile Include="Prepare\VNonRegisterOrderFeedDAL.cs" />
+    <Compile Include="Prepare\VNonRegisterOrderSetDAL.cs" />
+    <Compile Include="Prepare\VOrderFeedWaitRegisterDAL.cs" />
+    <Compile Include="Prepare\VRegisterOrderFeedDAL.cs" />
+    <Compile Include="Prepare\VRegisterOrderMilkDAL.cs" />
+    <Compile Include="Prepare\VRegisterOrderSetDAL.cs" />
+    <Compile Include="Tables\AdmitPatientDAL.cs" />
+    <Compile Include="Tables\CutOffTimeDAL.cs" />
+    <Compile Include="Tables\MedFeedChargeDAL.cs" />
+    <Compile Include="Tables\MedFeedChargeItemDAL.cs" />
+    <Compile Include="Tables\MenuItemChangeDAL.cs" />
+    <Compile Include="Tables\MenuStandardDAL.cs" />
+    <Compile Include="Tables\NutrientDAL.cs" />
+    <Compile Include="Formula\VFoodTypeDAL.cs" />
+    <Compile Include="Functions\FunctionDAL.cs" />
+    <Compile Include="Master\ZMenuDAL.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tables\DiseaseCategoryDAL.cs" />
+    <Compile Include="Tables\DivisionDAL.cs" />
+    <Compile Include="Tables\FoodCategoryDAL.cs" />
+    <Compile Include="Tables\FormulaDiseaseDAL.cs" />
+    <Compile Include="Tables\FormulaFeedDAL.cs" />
+    <Compile Include="Tables\FormulaMilkDAL.cs" />
+    <Compile Include="Tables\FormulaMilkItemDAL.cs" />
+    <Compile Include="Tables\FormularFeedItemDAL.cs" />
+    <Compile Include="Tables\FormulaServeDAL.cs" />
+    <Compile Include="Tables\FormulaSetDAL.cs" />
+    <Compile Include="Tables\FormulaSetItemDAL.cs" />
+    <Compile Include="Tables\HolidayDAL.cs" />
+    <Compile Include="Tables\MaterialClassDAL.cs" />
+    <Compile Include="Tables\MaterialGroupDAL.cs" />
+    <Compile Include="Tables\MaterialMasterDAL.cs" />
+    <Compile Include="Tables\MaterialNutrientDAL.cs" />
+    <Compile Include="Tables\MaterialSeasonDAL.cs" />
+    <Compile Include="Tables\MaterialUnitDAL.cs" />
+    <Compile Include="Tables\MenuDateDAL.cs" />
+    <Compile Include="Tables\MenuDetailDAL.cs" />
+    <Compile Include="Tables\MenuDiseaseDAL.cs" />
+    <Compile Include="Tables\MenuItemDAL.cs" />
+    <Compile Include="Tables\MilkCategoryDAL.cs" />
+    <Compile Include="Tables\MilkCodeDAL.cs" />
+    <Compile Include="Tables\OfficerDAL.cs" />
+    <Compile Include="Tables\OrderMedicalFeedDAL.cs" />
+    <Compile Include="Tables\OrderMedicalItemDAL.cs" />
+    <Compile Include="Tables\OrderMedicalSetDAL.cs" />
+    <Compile Include="Tables\OrderMilkDAL.cs" />
+    <Compile Include="Tables\OrderNonMedicalDAL.cs" />
+    <Compile Include="Tables\OrderNonMedicalItemDAL.cs" />
+    <Compile Include="Tables\OrderPartyDAL.cs" />
+    <Compile Include="Tables\OrderPartyItemDAL.cs" />
+    <Compile Include="Tables\OrderWelfareDAL.cs" />
+    <Compile Include="Tables\OrderWelfareDetailDAL.cs" />
+    <Compile Include="Tables\PlanMaterialClassDAL.cs" />
+    <Compile Include="Tables\PlanMaterialDivisionDAL.cs" />
+    <Compile Include="Tables\PlanMaterialItemDAL.cs" />
+    <Compile Include="Tables\PlanOrderCouncilDAL.cs" />
+    <Compile Include="Tables\PlanOrderDAL.cs" />
+    <Compile Include="Tables\PlanOrderDivisionDAL.cs" />
+    <Compile Include="Tables\PlanToolsDivisionDAL.cs" />
+    <Compile Include="Tables\PlanToolsItemDAL.cs" />
+    <Compile Include="Tables\PODAL.cs" />
+    <Compile Include="Tables\POITEMDAL.cs" />
+    <Compile Include="Tables\PrepareReturnDAL.cs" />
+    <Compile Include="Tables\PrepareReturnItemDAL.cs" />
+    <Compile Include="Tables\PrepareTimeDAL.cs" />
+    <Compile Include="Tables\PrepareWeightAfterDAL.cs" />
+    <Compile Include="Tables\PrepareWeightAfterItemDAL.cs" />
+    <Compile Include="Tables\PrePODAL.cs" />
+    <Compile Include="Tables\PrePODivisionDAL.cs" />
+    <Compile Include="Tables\PrePODivisionItemDAL.cs" />
+    <Compile Include="Tables\PrePODuedateDAL.cs" />
+    <Compile Include="Tables\PrePOItemDAL.cs" />
+    <Compile Include="Tables\ReceiveDAL.cs" />
+    <Compile Include="Tables\ReceiveItemDAL.cs" />
+    <Compile Include="Tables\RepairstatusDAL.cs" />
+    <Compile Include="Tables\RunningDAL.cs" />
+    <Compile Include="Tables\StdDeliveryTimeDAL.cs" />
+    <Compile Include="Tables\StdMenuDAL.cs" />
+    <Compile Include="Tables\StdMenuDateDAL.cs" />
+    <Compile Include="Tables\StdMenuDiseaseDAL.cs" />
+    <Compile Include="Tables\StdMenuItemDAL.cs" />
+    <Compile Include="Tables\StdTimeTableDAL.cs" />
+    <Compile Include="Tables\StockCheckDAL.cs" />
+    <Compile Include="Tables\StockCheckItemDAL.cs" />
+    <Compile Include="Tables\StockInDAL.cs" />
+    <Compile Include="Tables\StockinItemDAL.cs" />
+    <Compile Include="Tables\StockoutitemDAL.cs" />
+    <Compile Include="Tables\SupplierDAL.cs" />
+    <Compile Include="Tables\SysconfigDAL.cs" />
+    <Compile Include="Tables\StockOutDAL.cs" />
+    <Compile Include="Tables\TitleDAL.cs" />
+    <Compile Include="Tables\UnitDAL.cs" />
+    <Compile Include="Tables\VPlanFoodDivisionSearchDAL.cs" />
+    <Compile Include="Tables\WardResponseDAL.cs" />
+    <Compile Include="Tables\WelfareRealServiceDAL.cs" />
+    <Compile Include="Tables\WelfareRightDAL.cs" />
+    <Compile Include="Tables\WelfareRightItemDAL.cs" />
+    <Compile Include="Tables\ZRoleAssignDAL.cs" />
+    <Compile Include="Tables\WardDAL.cs" />
+    <Compile Include="Tables\ZRoleDAL.cs" />
+    <Compile Include="Tables\ZRoleRefDAL.cs" />
+    <Compile Include="Utilities\BaseDB.cs" />
+    <Compile Include="Utilities\OracleDB.cs" />
+    <Compile Include="Utilities\OracleGenerateDAL.cs" />
+    <Compile Include="Utilities\OracleTransactionDB.cs" />
+    <Compile Include="Utilities\SqlDB.cs" />
+    <Compile Include="Utilities\SqlGenerateDAL.cs" />
+    <Compile Include="Views\VAdmitPatientDAL.cs" />
+    <Compile Include="Views\VCutOrderSearchDAL.cs" />
+    <Compile Include="Views\VDiseaseCategoryDAL.cs" />
+    <Compile Include="Views\VDivisionDAL.cs" />
+    <Compile Include="Views\VDivisionSearchDAL.cs" />
+    <Compile Include="Views\VFoodTypePriceDAL.cs" />
+    <Compile Include="Views\VFormulaDiseaseDAL.cs" />
+    <Compile Include="Views\VFormulaFeedItemNutrientDAL.cs" />
+    <Compile Include="Views\VFormulaFeedLDDAL.cs" />
+    <Compile Include="Views\VFormulaFeedMDDAL.cs" />
+    <Compile Include="Views\VFormulafeedNutrientDAL.cs" />
+    <Compile Include="Views\VFormulaItemNutrientDAL.cs" />
+    <Compile Include="Views\VFormulaMilkDAL.cs" />
+    <Compile Include="Views\VFormulaMilkListDAL.cs" />
+    <Compile Include="Views\VFormulaMilkNutrientDAL.cs" />
+    <Compile Include="Views\VFormulaOrderDAL.cs" />
+    <Compile Include="Views\VFormularFeedBDDAL.cs" />
+    <Compile Include="Views\VFormularFeedItemDAL.cs" />
+    <Compile Include="Views\VFormulaServeDAL.cs" />
+    <Compile Include="Views\VFormulaSetItemDAL.cs" />
+    <Compile Include="Views\VFormulaSetMenuDAL.cs" />
+    <Compile Include="Views\VFormulaSetNutrientDAL.cs" />
+    <Compile Include="Views\VFormulaSetSearchDAL.cs" />
+    <Compile Include="Views\VGroupPermissionsearchDAL.cs" />
+    <Compile Include="Views\VHolidayDAL.cs" />
+    <Compile Include="Views\VMaterialClassDAL.cs" />
+    <Compile Include="Views\VMaterialGroupDAL.cs" />
+    <Compile Include="Views\VMaterialMasterDAL.cs" />
+    <Compile Include="Views\VMaterialMaster_UnitDAL.cs" />
+    <Compile Include="Views\VMaterialNutrientDAL.cs" />
+    <Compile Include="Views\VMaterialMasterUnitDAL.cs" />
+    <Compile Include="Views\VMaterialStockoutWasteDAL.cs" />
+    <Compile Include="Views\VMedFeedChargeDAL.cs" />
+    <Compile Include="Views\VMedFeedChargePopup.cs" />
+    <Compile Include="Views\VMenuDiseaseDAL.cs" />
+    <Compile Include="Views\VMenuFormulaListDAL.cs" />
+    <Compile Include="Views\VMenuItemDAL.cs" />
+    <Compile Include="Views\VMenuNutrientDAL.cs" />
+    <Compile Include="Views\VMenuSearchDAL.cs" />
+    <Compile Include="Views\VMenuStdMenuDAL.cs" />
+    <Compile Include="Views\VMilkCategoryDAL.cs" />
+    <Compile Include="Views\VMilkCodeDAL.cs" />
+    <Compile Include="Views\VMilkCodeSearchDAL.cs" />
+    <Compile Include="Views\VNutrientDAL.cs" />
+    <Compile Include="Views\VOfficerDAL.cs" />
+    <Compile Include="Views\VOrderChangeDAL.cs" />
+    <Compile Include="Views\VOrderDetailDAL.cs" />
+    <Compile Include="Views\VOrderDetailItemDAL.cs" />
+    <Compile Include="Views\VOrderFeedSlipDAL.cs" />
+    <Compile Include="Views\VOrderMilkWaitRegisterDAL.cs" />
+    <Compile Include="Views\VOrderNpoDAL.cs" />
+    <Compile Include="Views\VOrderPartyDAL.cs" />
+    <Compile Include="Views\VOrderPartyItemDAL.cs" />
+    <Compile Include="Views\VOrderPartySearchDAL.cs" />
+    <Compile Include="Views\VOrderSetSlipDAL.cs" />
+    <Compile Include="Views\VOrderWaitRegisterDAL.cs" />
+    <Compile Include="Views\VOrderWelfareDAL.cs" />
+    <Compile Include="Tables\OrderWelfareItemDAL.cs" />
+    <Compile Include="Views\VOrderWelfareItemDAL.cs" />
+    <Compile Include="Views\VPlanFoodDivisionMaterialDAL.cs" />
+    <Compile Include="Views\VPlanFoodMaterialDAL.cs" />
+    <Compile Include="Views\VPlanFoodSearchDAL.cs" />
+    <Compile Include="Views\VPLanMaterialClassDAL.cs" />
+    <Compile Include="Views\VPlanOrderCouncilDAL.cs" />
+    <Compile Include="Views\VPlanToolsDivisionMaterialDAL.cs" />
+    <Compile Include="Views\VPlanToolsDivisionSearchDAL.cs" />
+    <Compile Include="Views\VPlanToolsMaterialDAL.cs" />
+    <Compile Include="Views\VPlanToolsSearchDAL.cs" />
+    <Compile Include="Views\VPODAL.cs" />
+    <Compile Include="Views\VPOItemDAL.cs" />
+    <Compile Include="Views\VPrepareReturnDAL.cs" />
+    <Compile Include="Views\VPrepareReturnItemDAL.cs" />
+    <Compile Include="Views\VPrepareWeightAfterDAL.cs" />
+    <Compile Include="Views\VPrepareWeightAfterItemDAL.cs" />
+    <Compile Include="Views\VPrePODAL.cs" />
+    <Compile Include="Views\VPrePODivisionDAL.cs" />
+    <Compile Include="Views\VPrePODivisionItemDAL.cs" />
+    <Compile Include="Views\VPrePODivisionItemMenuDAL.cs" />
+    <Compile Include="Views\VPrePoDivisionMaterialDAL.cs" />
+    <Compile Include="Views\VPrePODivisionSumDAL.cs" />
+    <Compile Include="Views\VPrePODuedateItemDAL.cs" />
+    <Compile Include="Views\VPrePOItemDAL.cs" />
+    <Compile Include="Views\VPrePOMaterialClassDAL.cs" />
+    <Compile Include="Views\VPrePOMenuDAL.cs" />
+    <Compile Include="Views\VPrePOPopupDAL.cs" />
+    <Compile Include="Views\VPrePOReceiveDAL.cs" />
+    <Compile Include="Views\VReceiveItemDAL.cs" />
+    <Compile Include="Views\VReceiveMaterialDAL.cs" />
+    <Compile Include="Views\VRefFormulaSetDAL.cs" />
+    <Compile Include="Views\VRepairrequestDAL.cs" />
+    <Compile Include="Views\VRetrunRequestPopupDAL.cs" />
+    <Compile Include="Views\VReturnWarehouseDAL.cs" />
+    <Compile Include="Views\VSendPreOrderSupplierPopupDAL.cs" />
+    <Compile Include="Views\VSendSupplierDAL.cs" />
+    <Compile Include="Views\VStdMenuDiseaseDAL.cs" />
+    <Compile Include="Views\VStdMenuItemDAL.cs" />
+    <Compile Include="Views\VStdMenuNutrientDAL.cs" />
+    <Compile Include="Views\VStdMenuSearchDAL.cs" />
+    <Compile Include="Views\VStockCheckAuditListDAL.cs" />
+    <Compile Include="Views\VStockCheckCountDAL.cs" />
+    <Compile Include="Views\VStockInDAL.cs" />
+    <Compile Include="Views\VStockinFoodPopupDAL.cs" />
+    <Compile Include="Views\VStockinItemDAL.cs" />
+    <Compile Include="Views\VStockinitemPoDAL.cs" />
+    <Compile Include="Views\VStockinToolsPopupDAL.cs" />
+    <Compile Include="Views\VStockOutDAL.cs" />
+    <Compile Include="Views\VStockoutItemDAL.cs" />
+    <Compile Include="Views\VStockOutRequestDAL.cs" />
+    <Compile Include="Views\VStockoutReturenPopUpDAL.cs" />
+    <Compile Include="Views\VStockRemainDAL.cs" />
+    <Compile Include="Views\VSupplierDAL.cs" />
+    <Compile Include="Views\VSystemMenuSearchDAL.cs" />
+    <Compile Include="Views\VToDoListMinStockDAL.cs" />
+    <Compile Include="Views\VToDoListPlanRemainDAL.cs" />
+    <Compile Include="Views\VWardResponseDAL.cs" />
+    <Compile Include="Views\VWardSearchDAL.cs" />
+    <Compile Include="Views\VWelfareRealServiceDAL.cs" />
+    <Compile Include="Views\VWelfareRightDAL.cs" />
+    <Compile Include="Views\VWelfareRightItemDAL.cs" />
+    <Compile Include="Views\VZMenuRoleDAL.cs" />
+    <Compile Include="Views\VZMenuDAL.cs" />
+    <Compile Include="Views\VReceiveDAL.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Data\Data.csproj">
+      <Project>{35E6306D-3445-4FA3-BAC5-268DE4AE995E}</Project>
+      <Name>Data</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Purchase\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

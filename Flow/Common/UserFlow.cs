@@ -182,11 +182,7 @@ namespace SHND.Flow.Common
             bool ret = true;
 
             offDAL = new OfficerDAL();
-            if (uData.UID != 0)
-            {
-                offDAL.GetDataByLOID(uData.UID, null);
-            }
-
+            offDAL.GetDataByLOID(uData.UID, null);
             offDAL.TITLE = uData.Title;
             offDAL.USERNAME = uData.UserID;
             offDAL.FIRSTNAME = uData.FName;

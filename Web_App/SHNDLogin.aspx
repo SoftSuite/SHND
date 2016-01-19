@@ -15,9 +15,26 @@
 //check windows
 if (window.name != 'SHNDSYSTEM') 
 {
-    window.open(parent.document.URL, 'SHNDSYSTEM', 'resizable=yes,scrollbars=yes,width=1040,height=700');
+    //window.open(parent.document.URL, 'SHNDSYSTEM', 'resizable=yes,scrollbars=yes,width=1040,height=700');
+    //window.open(parent.document.URL, 'SHNDSYSTEM', 'resizable=yes,scrollbars=yes,fullscreen=yes');
+    //
+    FullScreenWindow();
     document.location = 'default.aspx';
 }
+
+function FullScreenWindow(){
+    var params = [
+        'height='+screen.height,
+        'width='+screen.width,
+        'fullscreen=yes' // only works in IE, but here for completeness
+    ].join(',');
+    var popup = window.open('SHNDMain.aspx', 'SHNDSYSTEM', params); 
+    popup.moveTo(0,0);
+    
+    return false;
+}
+
+
 </script>
 </head>
 <body style="background-color:#eeeeee">

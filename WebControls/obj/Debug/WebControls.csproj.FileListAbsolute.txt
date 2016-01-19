@@ -1,5 +1,0 @@
-C:\SHND\Sourcecode\WebControls\bin\Debug\WebControls.dll
-C:\SHND\Sourcecode\WebControls\bin\Debug\WebControls.pdb
-C:\SHND\Sourcecode\WebControls\obj\Debug\ResolveAssemblyReference.cache
-C:\SHND\Sourcecode\WebControls\obj\Debug\WebControls.dll
-C:\SHND\Sourcecode\WebControls\obj\Debug\WebControls.pdb

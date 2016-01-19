@@ -1,7 +1,0 @@
-C:\SHND\Sourcecode\DAL\bin\Debug\DAL.dll
-C:\SHND\Sourcecode\DAL\bin\Debug\DAL.pdb
-C:\SHND\Sourcecode\DAL\bin\Debug\Data.dll
-C:\SHND\Sourcecode\DAL\bin\Debug\Data.pdb
-C:\SHND\Sourcecode\DAL\obj\Debug\ResolveAssemblyReference.cache
-C:\SHND\Sourcecode\DAL\obj\Debug\DAL.dll
-C:\SHND\Sourcecode\DAL\obj\Debug\DAL.pdb

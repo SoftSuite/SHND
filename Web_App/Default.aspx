@@ -5,7 +5,7 @@
 <head runat="server">
     <title>Sirirach Hospital Nutrient Department System</title>
     
-    <script type="text/javascript" language="javascript">
+<%--    <script type="text/javascript" language="javascript">
         function FullScreenWindow(){
             var params = [
                 'height='+screen.height,
@@ -17,14 +17,14 @@
             
             return false;
         }
-    </script>
+    </script>--%>
 </head>
 <body>
-    <form id="form1" runat="server"  >
+    <form id="form1" runat="server">
         &nbsp;<div>
             Siriraj Hospital Nutrition Department System<br />
             <br />
-            <a href="#" onclick="return FullScreenWindow();">Click to Enter System</a></div>
+            <a href="#" onclick="window.open('SHNDMain.aspx', 'SHNDSYSTEM', 'resizable=yes,scrollbars=yes,width=1015,height=700'); return false;">Click to Enter System</a></div>
     </form>
 </body>
 </html>

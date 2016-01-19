@@ -11,7 +11,7 @@
         rel="stylesheet" type="text/css" />
         
         
-<script language='JavaScript'>
+<%--<script language='JavaScript'>
 //check windows
 if (window.name != 'SHNDSYSTEM') 
 {
@@ -35,7 +35,17 @@ function FullScreenWindow(){
 }
 
 
+</script>--%>
+
+<script language='JavaScript'>
+//check windows
+if (window.name != 'SHNDSYSTEM') 
+{
+    window.open(parent.document.URL, 'SHNDSYSTEM', 'resizable=yes,scrollbars=yes,width=1040,height=700');
+    document.location = 'default.aspx';
+}
 </script>
+
 </head>
 <body style="background-color:#eeeeee">
     <form id="form1" runat="server">

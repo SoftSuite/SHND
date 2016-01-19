@@ -1,5 +1,0 @@
-D:\MyProject\www\SHND\Data\bin\Debug\Data.dll
-D:\MyProject\www\SHND\Data\bin\Debug\Data.pdb
-D:\MyProject\www\SHND\Data\obj\Debug\ResolveAssemblyReference.cache
-D:\MyProject\www\SHND\Data\obj\Debug\Data.dll
-D:\MyProject\www\SHND\Data\obj\Debug\Data.pdb

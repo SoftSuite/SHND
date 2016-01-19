@@ -1,5 +1,0 @@
-bin\Debug\WebControls.dll
-bin\Debug\WebControls.pdb
-obj\Debug\ResolveAssemblyReference.cache
-obj\Debug\WebControls.dll
-obj\Debug\WebControls.pdb
